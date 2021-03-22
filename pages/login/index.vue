@@ -42,6 +42,7 @@ import { login,register } from '@/api/user.js'
 // 仅在客户端加载js-cookie包
 const cookie = process.client ? require('js-cookie') : undefined
 export default {
+  middleware: 'notAuthenticated',
   data(){
     return {
       errors:{}, // 错误处理

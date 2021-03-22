@@ -7,18 +7,18 @@
         <form>
           <fieldset>
             <fieldset class="form-group">
-                <input type="text" class="form-control form-control-lg" placeholder="Article Title">
+                <input type="text" class="form-control form-control-lg" v-model="title" placeholder="Article Title">
             </fieldset>
             <fieldset class="form-group">
-                <input type="text" class="form-control" placeholder="What's this article about?">
+                <input type="text" class="form-control" v-model="description" placeholder="What's this article about?">
             </fieldset>
             <fieldset class="form-group">
-                <textarea class="form-control" rows="8" placeholder="Write your article (in markdown)"></textarea>
+                <textarea class="form-control" rows="8" v-model="body" placeholder="Write your article (in markdown)"></textarea>
             </fieldset>
             <fieldset class="form-group">
                 <input type="text" class="form-control" placeholder="Enter tags"><div class="tag-list"></div>
             </fieldset>
-            <button class="btn btn-lg pull-xs-right btn-primary" type="button">
+            <button class="btn btn-lg pull-xs-right btn-primary" type="button" @click="submitArticle">
                 Publish Article
             </button>
           </fieldset>
@@ -31,8 +31,29 @@
 </template>
 
 <script>
+import { createArticle } from '@/api/article'
 export default {
-
+  name:'create',
+  data(){
+    return{
+      title:'',
+      description:'',
+      body:'',
+      tagList:[]//标签列表
+    }
+  },
+  methods:{
+    async submitArticle(){
+      let params = {
+        title:this.title,
+        description:this.description,
+        body:this.description,
+        tagList:[]//标签列表
+      }
+      console.log(params)
+      await createArticle(params)
+    }
+  }
 }
 </script>
 

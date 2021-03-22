@@ -88,6 +88,8 @@
 
 <script>
 export default {
+  // 在路由匹配组件渲染之前会执行中间件处理
+  middleware:'authenticate'
 
 }
 </script>
